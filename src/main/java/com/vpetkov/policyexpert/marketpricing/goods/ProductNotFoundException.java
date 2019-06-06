@@ -1,4 +1,7 @@
 package com.vpetkov.policyexpert.marketpricing.goods;
 
-public class ProductNotFoundException {
+class ProductNotFoundException extends RuntimeException {
+    ProductNotFoundException(String productName) {
+        super("Product '" + productName + "' was not found!");
+    }
 }

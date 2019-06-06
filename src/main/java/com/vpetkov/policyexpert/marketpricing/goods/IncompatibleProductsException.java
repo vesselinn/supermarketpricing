@@ -1,4 +1,7 @@
 package com.vpetkov.policyexpert.marketpricing.goods;
 
-public class IncompatibleProductsException {
+class IncompatibleProductsException extends RuntimeException {
+    IncompatibleProductsException(String message) {
+        super(message);
+    }
 }
