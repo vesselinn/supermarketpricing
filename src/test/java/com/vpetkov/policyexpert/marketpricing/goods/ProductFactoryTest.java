@@ -42,4 +42,17 @@ class ProductFactoryTest {
         });
 
     }
+
+    @Test
+    void successfulCreateProduct() {
+
+        Product oranges = getProduct("Oranges", "0.900");
+        Product coke = getProduct("Coke", "1");
+        Product beans = getProduct("Beans", "2");
+
+        Assertions.assertEquals("Oranges", oranges.getName());
+        Assertions.assertEquals("Coke", coke.getName());
+        Assertions.assertEquals("Beans", beans.getName());
+
+    }
 }
