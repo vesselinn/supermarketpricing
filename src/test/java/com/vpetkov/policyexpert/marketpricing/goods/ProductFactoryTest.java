@@ -44,6 +44,15 @@ class ProductFactoryTest {
     }
 
     @Test
+    void throwNumberFormatExceptionForNegativeQuantity() {
+
+        Assertions.assertThrows(NumberFormatException.class, () -> {
+            getProduct("Oranges", "-1");
+        });
+
+    }
+
+    @Test
     void successfulCreateProduct() {
 
         Product oranges = getProduct("Oranges", "0.900");

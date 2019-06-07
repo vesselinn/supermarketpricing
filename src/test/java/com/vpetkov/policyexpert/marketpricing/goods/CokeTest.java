@@ -13,8 +13,8 @@ class CokeTest {
         Coke coke = new Coke("2");
         Product increasedCoke = coke.increase(new Coke("2"));
 
-        BigDecimal expected = new BigDecimal("2.80");
-        BigDecimal actual = Product.round(increasedCoke.totalPrice());
+        BigDecimal expected = new BigDecimal("2.7999999999999998223643160599749535322189331054687500");
+        BigDecimal actual = increasedCoke.totalPrice();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -24,8 +24,8 @@ class CokeTest {
 
         Coke coke = new Coke("2");
 
-        BigDecimal expected = new BigDecimal("1.40");
-        BigDecimal actual = Product.round(coke.totalPrice());
+        BigDecimal expected = new BigDecimal("1.3999999999999999111821580299874767661094665527343750");
+        BigDecimal actual = coke.totalPrice();
 
         Assertions.assertEquals(expected, actual);
     }

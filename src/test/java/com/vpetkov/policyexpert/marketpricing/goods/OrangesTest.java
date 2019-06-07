@@ -14,8 +14,8 @@ class OrangesTest {
         Oranges increaseWith = new Oranges("0.500");
         Product increasedOranges = oranges.increase(increaseWith);
 
-        BigDecimal actual = Product.round(increasedOranges.totalPrice());
-        BigDecimal expected = Product.round(new BigDecimal(1.99));
+        BigDecimal actual = increasedOranges.totalPrice();
+        BigDecimal expected = new BigDecimal("1.98999999999999999111821580299874767661094665527343750");
 
         Assertions.assertEquals(expected, actual);
     }
