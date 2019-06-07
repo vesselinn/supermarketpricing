@@ -36,7 +36,7 @@ class Coke implements Product {
     @Override
     public void printQuantityAndPrice() {
         String message = quantity + " x " + Product.round(PRICE).toString()
-                + "\n" + this.getName() + "      " + totalPrice().toString();
+                + "\n" + this.getName() + "      " + Product.round(totalPrice()).toString();
         System.out.println(message);
     }
 
@@ -49,7 +49,7 @@ class Coke implements Product {
 
     @Override
     public BigDecimal totalPrice() {
-        return Product.round(PRICE.multiply(BigDecimal.valueOf(quantity)));
+        return PRICE.multiply(BigDecimal.valueOf(quantity));
     }
 
     @Override

@@ -40,16 +40,16 @@ public class Cashier {
                 .map(product -> product.totalPrice())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         System.out.println("--------------------------------");
-        System.out.println("Sub-total             " + totalPrice);
+        System.out.println("Sub-total             " + Product.round(totalPrice).toString());
         System.out.println("\nSavings");
         products.values().stream().forEach(product -> product.printDiscount());
         System.out.println("--------------------------------");
         BigDecimal totalSavings = products.values().stream()
                 .map(product -> product.discount())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        System.out.println("Total savings         -" + Product.round(totalSavings));
+        System.out.println("Total savings         -" + Product.round(totalSavings).toString());
         System.out.println("--------------------------------");
-        System.out.println("Total to Pay           " + Product.round(totalPrice.subtract(totalSavings)));
+        System.out.println("Total to Pay           " + Product.round(totalPrice.subtract(totalSavings)).toString());
 
     }
 }

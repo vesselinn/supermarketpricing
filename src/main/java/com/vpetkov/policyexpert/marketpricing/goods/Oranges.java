@@ -38,7 +38,7 @@ class Oranges implements Product {
     public void printQuantityAndPrice() {
 
         String message = quantity.toString() + " kg x " + Product.round(PRICE).toString() + "/kg"
-                + "\n" + this.getName() + "      " + totalPrice().toString();
+                + "\n" + this.getName() + "      " + Product.round(totalPrice()).toString();
         System.out.println(message);
     }
 
@@ -49,7 +49,7 @@ class Oranges implements Product {
 
     @Override
     public BigDecimal totalPrice() {
-        return Product.round(PRICE.multiply(quantity));
+        return PRICE.multiply(quantity);
     }
 
     @Override
