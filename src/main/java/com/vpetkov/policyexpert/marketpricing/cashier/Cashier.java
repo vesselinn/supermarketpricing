@@ -22,14 +22,12 @@ public class Cashier {
      * Adds {@link Product} to list of goods
      *
      * @param product {@link Product}
-     * @return instance of current {@link Cashier}
      */
-    public Cashier add(Product product) {
+    public void add(Product product) {
         Product presentProduct = this.products.putIfAbsent(product.getName(), product);
         if (presentProduct != null) {
             this.products.put(product.getName(), presentProduct.increase(product));
         }
-        return this;
     }
 
     /**
