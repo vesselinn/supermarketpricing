@@ -40,4 +40,25 @@ class BeansTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    void printQuantityAndPrice() {
+        Beans beans = new Beans("4");
+
+        String expected = "\n4 x 0.50" +
+                          "\nBeans      2.00";
+        String actual = beans.printQuantityAndPrice();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void printDiscount() {
+        Beans beans = new Beans("4");
+
+        String expected = "\nBeans 3 for 2        -0.50";
+        String actual = beans.printDiscount();
+
+        Assertions.assertEquals(expected, actual);
+    }
 }

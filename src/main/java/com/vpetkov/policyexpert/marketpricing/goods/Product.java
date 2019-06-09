@@ -23,14 +23,9 @@ public interface Product {
     Product increase(Product product);
 
     /**
-     * Prints name, quantity, single and total price of a certain product
+     * Returns name, quantity, single and total price of a certain product, ready for print
      */
-    void printQuantityAndPrice();
-
-    /**
-     * Prints accumulated discount, if there is
-     */
-    void printDiscount();
+    String printQuantityAndPrice();
 
     /**
      *
@@ -38,14 +33,12 @@ public interface Product {
      */
     BigDecimal totalPrice();
 
-    /**
-     *
-     * @return price of the discount
-     */
-    BigDecimal discount();
-
     static BigDecimal round(BigDecimal value){
         return value.setScale(2, RoundingMode.HALF_UP);
+    }
+
+    default BigDecimal singlePrice() {
+        return ProductMap.getByName(getName()).price();
     }
 
 }

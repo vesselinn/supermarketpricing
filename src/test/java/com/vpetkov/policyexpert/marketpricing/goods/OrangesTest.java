@@ -31,4 +31,15 @@ class OrangesTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    void printQuantityAndPrice() {
+        Oranges oranges = new Oranges("4");
+
+        String expected = "\n4.0 kg x 1.99/kg" +
+                          "\nOranges      7.96";
+        String actual = oranges.printQuantityAndPrice();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
 }

@@ -2,27 +2,19 @@ package com.vpetkov.policyexpert.marketpricing.goods;
 
 import java.math.BigDecimal;
 
-class Oranges implements Product {
-
-    private static final BigDecimal PRICE = new BigDecimal(1.99d);
-
-    private final BigDecimal quantity;
+class Oranges extends Quantity {
 
     Oranges(String quantity) {
-
-        if (null == quantity) throwNumberFormatException();
-        this.quantity = BigDecimal.valueOf(Double.valueOf(quantity));
-        if (this.quantity.compareTo(BigDecimal.ZERO) <= 0) throwNumberFormatException();
-
+        super(quantity);
     }
 
     private Oranges(BigDecimal quantity) {
-        this.quantity = quantity;
+        super(quantity);
     }
 
     @Override
     public String getName() {
-        return ProductMap.ORANGES.getProductName();
+        return ProductMap.ORANGES.productName();
     }
 
     @Override
@@ -34,30 +26,4 @@ class Oranges implements Product {
         return new Oranges(this.quantity.add(oranges.quantity));
     }
 
-    @Override
-    public void printQuantityAndPrice() {
-
-        String message = quantity.toString() + " kg x " + Product.round(PRICE).toString() + "/kg"
-                + "\n" + this.getName() + "      " + Product.round(totalPrice()).toString();
-        System.out.println(message);
-    }
-
-    @Override
-    public void printDiscount() {
-
-    }
-
-    @Override
-    public BigDecimal totalPrice() {
-        return PRICE.multiply(quantity);
-    }
-
-    @Override
-    public BigDecimal discount() {
-        return BigDecimal.ZERO;
-    }
-
-    private void throwNumberFormatException() {
-        throw new NumberFormatException("'quantity' for Oranges product should be positive floating value");
-    }
 }

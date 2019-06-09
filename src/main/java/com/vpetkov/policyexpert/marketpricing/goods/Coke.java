@@ -2,26 +2,22 @@ package com.vpetkov.policyexpert.marketpricing.goods;
 
 import java.math.BigDecimal;
 
-class Coke implements Product {
+class Coke extends OfferBuyXForY {
 
-    private static final BigDecimal PRICE = new BigDecimal(0.70d);
-    private final int quantity;
+    private static final int X = 2;
+    private static final BigDecimal Y = BigDecimal.ONE;
 
     Coke(String quantity) {
-
-        if (null == quantity) throwNumberFormatException();
-        this.quantity = Integer.valueOf(quantity);
-        if (this.quantity <= 0) throwNumberFormatException();
-
+        super(X, Y, quantity);
     }
 
     private Coke(int quantity) {
-        this.quantity = quantity;
+        super(X, Y, quantity);
     }
 
     @Override
     public String getName() {
-        return ProductMap.COKE.getProductName();
+        return ProductMap.COKE.productName();
     }
 
     @Override
@@ -33,34 +29,4 @@ class Coke implements Product {
         return new Coke(this.quantity + coke.quantity);
     }
 
-    @Override
-    public void printQuantityAndPrice() {
-        String message = quantity + " x " + Product.round(PRICE).toString()
-                + "\n" + this.getName() + "      " + Product.round(totalPrice()).toString();
-        System.out.println(message);
-    }
-
-    @Override
-    public void printDiscount() {
-
-        String message = this.getName() + " 2 for £1        -" + Product.round(discount());
-        System.out.println(message);
-    }
-
-    @Override
-    public BigDecimal totalPrice() {
-        return PRICE.multiply(BigDecimal.valueOf(quantity));
-    }
-
-    @Override
-    public BigDecimal discount() {
-        BigDecimal discount = totalPrice().subtract(
-                PRICE.multiply(BigDecimal.valueOf(quantity % 2))
-                        .add(BigDecimal.valueOf(quantity / 2 * 1)));
-        return Product.round(discount);
-    }
-
-    private void throwNumberFormatException() {
-        throw new NumberFormatException("'quantity' for Coke product should be positive integer value");
-    }
 }

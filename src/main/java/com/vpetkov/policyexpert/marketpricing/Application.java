@@ -4,11 +4,7 @@ import com.vpetkov.policyexpert.marketpricing.cashier.Cashier;
 import com.vpetkov.policyexpert.marketpricing.goods.Product;
 import com.vpetkov.policyexpert.marketpricing.goods.ProductFactory;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public class Application {
 
@@ -18,7 +14,6 @@ public class Application {
             throw new IllegalArgumentException("Please provide at least one product");
         }
 
-        String fileName = args[0];
         Cashier cashier = new Cashier();
 
         Arrays.asList(args).stream().forEach(line -> {

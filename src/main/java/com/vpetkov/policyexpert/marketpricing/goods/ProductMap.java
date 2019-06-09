@@ -1,15 +1,18 @@
 package com.vpetkov.policyexpert.marketpricing.goods;
 
+import java.math.BigDecimal;
+
 enum ProductMap {
 
-    BEANS   ("Beans"),
-    COKE    ("Coke"),
-    ORANGES ("Oranges");
+    BEANS   ("Beans", new BigDecimal(0.50d)),
+    COKE    ("Coke", new BigDecimal(0.70d)),
+    ORANGES ("Oranges", new BigDecimal(1.99d));
 
     private final String productName;
-
-    ProductMap(String productName) {
+    private final BigDecimal price;
+    ProductMap(String productName, BigDecimal price) {
         this.productName = productName;
+        this.price = price;
     }
 
     static ProductMap getByName(String productName) {
@@ -20,8 +23,11 @@ enum ProductMap {
         throw new ProductNotFoundException(productName);
     }
 
-    String getProductName() {
+    String productName() {
         return this.productName;
     }
 
+    BigDecimal price() {
+        return this.price;
+    }
 }

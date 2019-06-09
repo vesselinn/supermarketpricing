@@ -41,4 +41,25 @@ class CokeTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    void printQuantityAndPrice() {
+        Coke coke = new Coke("4");
+
+        String expected = "\n4 x 0.70" +
+                          "\nCoke      2.80";
+        String actual = coke.printQuantityAndPrice();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void printDiscount() {
+        Coke coke = new Coke("4");
+
+        String expected = "\nCoke 2 for £1        -0.80";
+        String actual = coke.printDiscount();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
 }

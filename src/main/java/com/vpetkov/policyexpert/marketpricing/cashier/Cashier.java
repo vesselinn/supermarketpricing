@@ -1,5 +1,6 @@
 package com.vpetkov.policyexpert.marketpricing.cashier;
 
+import com.vpetkov.policyexpert.marketpricing.goods.Discount;
 import com.vpetkov.policyexpert.marketpricing.goods.Product;
 
 import java.math.BigDecimal;
@@ -35,21 +36,41 @@ public class Cashier {
      * Prints clients goods with their quantity and prices
      */
     public void print() {
-        products.values().stream().forEach(product -> product.printQuantityAndPrice());
-        BigDecimal totalPrice = products.values().stream()
+
+        BigDecimal totalPrice = totalPrice();
+        BigDecimal totalSavings = totalSavings();
+
+        StringBuilder builder = new StringBuilder();
+
+        products.values().stream()
+                .forEach(product -> builder.append(product.printQuantityAndPrice()));
+
+        builder.append("\n--------------------------------");
+        builder.append("\nSub-total             " + Product.round(totalPrice).toString());
+        builder.append("\n\nSavings");
+        products.values().stream()
+                .filter(product -> product instanceof Discount)
+                .map(product -> ((Discount) product).printDiscount())
+                .forEach(message -> builder.append(message));
+        builder.append("\n--------------------------------");
+
+        builder.append("\nTotal savings         -" + Product.round(totalSavings).toString());
+        builder.append("\n--------------------------------");
+        builder.append("\nTotal to Pay           " + Product.round(totalPrice.subtract(totalSavings)).toString());
+
+        System.out.println(builder.toString());
+    }
+
+    private BigDecimal totalPrice() {
+        return products.values().stream()
                 .map(product -> product.totalPrice())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        System.out.println("--------------------------------");
-        System.out.println("Sub-total             " + Product.round(totalPrice).toString());
-        System.out.println("\nSavings");
-        products.values().stream().forEach(product -> product.printDiscount());
-        System.out.println("--------------------------------");
-        BigDecimal totalSavings = products.values().stream()
-                .map(product -> product.discount())
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        System.out.println("Total savings         -" + Product.round(totalSavings).toString());
-        System.out.println("--------------------------------");
-        System.out.println("Total to Pay           " + Product.round(totalPrice.subtract(totalSavings)).toString());
+    }
 
+    private BigDecimal totalSavings() {
+        return products.values().stream()
+                .filter(product -> product instanceof Discount)
+                .map(product -> ((Discount) product).discount())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
